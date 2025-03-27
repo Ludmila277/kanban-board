@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Forms.css";
 
 const FormAddNewTask = (props) => {
-  const { formSubmit } = props;
+  const { formSubmit, onInputActive } = props;
   const [values, setValues] = useState({
     title: "",
     description: "",
@@ -11,6 +11,11 @@ const FormAddNewTask = (props) => {
   const handleChange = (e) => {
     const fieldName = e.target.name;
     setValues({ ...values, [fieldName]: e.target.value });
+    onInputActive(true);
+  };
+
+  const handleBlur = () => {
+    onInputActive(false);
   };
 
   const handleSubmit = (e) => {
@@ -19,6 +24,7 @@ const FormAddNewTask = (props) => {
       formSubmit(values.title, values.description);
     }
   };
+
   return (
     <form onSubmit={handleSubmit} className="form">
       <input
@@ -29,6 +35,7 @@ const FormAddNewTask = (props) => {
         placeholder="Enter task title"
         onChange={handleChange}
         value={values.title}
+        onBlur={handleBlur}
       />
       <textarea
         className="textarea"
@@ -37,12 +44,14 @@ const FormAddNewTask = (props) => {
         placeholder="Enter task description"
         value={values.description}
         onChange={handleChange}
+        onBlur={handleBlur}
       />
       <button className="submit" type="submit">
-        +Add
+        Submit
       </button>
     </form>
   );
 };
+
 
 export default FormAddNewTask;

@@ -1,0 +1,6 @@
+.main {
+  background: #0079bf;
+  padding: 20px;
+  flex-grow: 1;
+  max-width: 100%;
+}

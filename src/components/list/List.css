@@ -1,0 +1,72 @@
+.list {
+  width: 350px;
+  background: #ebecf0;
+  padding: 20px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin: 15px;
+  min-height: 282px;
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 20%);
+  overflow-x: hidden;
+  max-height: calc(100vh - 250px);
+  
+}
+.listTitle {
+  margin-top: 0;
+}
+
+.task {
+  background: #fff;
+  color: #000000;
+  margin: 7px 0;
+  padding: 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: "Roboto-Regular", serif;
+}
+
+.task:hover {
+  text-decoration: underline;
+}
+
+.taskLink {
+  text-decoration: none;
+}
+
+.addButton {
+  background: none;
+  border: none;
+  appearance: none;
+  font-size: 15px;
+  color: #737373;
+  margin-top: 15px;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: "Roboto-Regular", serif;
+}
+
+.addButton:hover {
+  color: #000;
+}
+.select {
+  font-size: 18px;
+  font-family: "Roboto-Regular", serif;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 8px;
+  border-color: #dedede;
+  width: 100%;
+}
+.option {
+  margin: 8px 0;
+  padding: 8px;
+  border-radius: 8px;
+  border-color: #dedede;
+}
+.option:hover,
+.option:focus {
+  background-color: #dedede;
+  font-family: "Roboto-Regular", serif;
+  font-style: italic;
+}

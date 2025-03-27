@@ -1,0 +1,67 @@
+.wrapper {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-family: "Roboto-Regular", serif;
+}
+
+.createdAt {
+  color: #737373;
+  font-style: italic;
+}
+
+.label {
+  margin-bottom: 10px;
+}
+
+.select {
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.homeLink {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  text-decoration: none;
+  color: #737373;
+}
+
+.homeLink:hover {
+  color: #000;
+}
+
+.emptyState {
+  text-align: center;
+}
+
+.emptyStateIcon {
+  width: 200px;
+}
+
+.textarea {
+  background: #fff;
+  border-radius: 8px;
+  border: #fff;
+  resize: both;
+
+  display: block;
+  font-size: 18px;
+  font-family: "Roboto-Regular", serif;
+  height: 50px;
+  width: 100%;
+
+  overflow: auto;
+  min-height: 50px;
+}

@@ -7,31 +7,41 @@ const TaskDetail = (props) => {
   const task = tasks.find((task) => task.id === taskId);
 
   const handleChange = (e) => {
-    const NewDescription = e.target.value;
+    const newDescription = e.target.value;
     const updatedTasks = tasks.map((task) => {
       if (task.id === taskId) {
-        return { ...task, description: NewDescription };
+        return { ...task, description: newDescription };
       }
       return task;
     });
     setTasks(updatedTasks);
   };
+
   return (
-    <div className="container">
+    <div className="wrapper">
       <Link to="/" className="homeLink">
-        &#x2715;
+        ×
       </Link>
       {task ? (
-        <>
+        <div className="task-details">
           <div className="header">
             <h2 className="title">{task.title}</h2>
           </div>
-          <textarea className="textarea" onChange={handleChange}>
-            {task.description || "This task has no description"}
-          </textarea>
-        </>
+          <div className="description-container">
+            <textarea
+              className="textarea"
+              value={task.description || ""}
+              onChange={handleChange}
+            />
+            {!task.description && (
+              <div className="placeholder">This task has no description</div>
+            )}
+          </div>
+        </div>
       ) : (
-        <h2>Task with id {taskId} not found</h2>
+        <div className="not-found">
+          <h2>Task with id {taskId} not found</h2>
+        </div>
       )}
     </div>
   );

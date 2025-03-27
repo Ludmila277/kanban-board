@@ -1,0 +1,58 @@
+/* Forms.css */
+.form {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  display: block;
+  border: 1px solid #465671;
+  border-radius: 8px;
+  margin-bottom: 7px;
+  padding: 8px;
+}
+
+.textarea {
+  font-family: "Roboto", sans-serif;
+  resize: both;
+  overflow: auto;
+  border: 1px solid #465671;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 7px;
+  min-height: 100px; 
+}
+
+.submit {
+  background: #0079bf;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 0;
+  width: 50px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.submit:hover {
+  background: #5d7194;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.input-error {
+  border-color: #dc3545;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-top: 0.5rem;
+}
+
+.success-message {
+  color: #28a745;
+  margin-top: 1rem;
+}

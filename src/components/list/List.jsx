@@ -1,20 +1,29 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {LIST_COLORS } from "../../config";
+import FormAddNewTask from "../forms/FormAddNewTask";
 import "./List.css";
-import { LIST_TYPES, LIST_COLORS } from "../../config";
-import FormAddNewTask from "../forms/FormAddNewTask"
+
 
 const List = (props) => {
   const { type, title, tasks, addNewTask } = props;
-  const [isAdding, setIsAdding] = useState(false);
+  const [isFormVisible, setFormVisible] = useState(false);
+  const [isInputActive, setInputActive] = useState(false);
+  const [isButtonHidden, setButtonHidden] = useState(false);
 
   const handleAddNewClick = () => {
-    setIsAdding(!isAdding);
+    setButtonHidden(true);
+    setFormVisible(true);
+  };
+
+  const handleInputActive = (isActive) => {
+    setInputActive(isActive);
   };
 
   const formSubmit = (title, description) => {
-    addNewTask(title, description);
-    setIsAdding(false);
+    addNewTask(title, description, type);
+    setFormVisible(false);
+    setButtonHidden(false);
   };
 
   return (
@@ -34,13 +43,16 @@ const List = (props) => {
       ) : (
         <p>No tasks added yet</p>
       )}
-      {type === LIST_TYPES.BACKLOG && (
+      {!isButtonHidden && !isInputActive && (
         <button onClick={handleAddNewClick} className="addButton">
           + Add card
         </button>
       )}
-      {type === LIST_TYPES.BACKLOG && isAdding && (
-        <FormAddNewTask formSubmit={formSubmit} />
+      {isFormVisible && (
+        <FormAddNewTask 
+          formSubmit={formSubmit}
+          onInputActive={handleInputActive}
+        />
       )}
     </div>
   );

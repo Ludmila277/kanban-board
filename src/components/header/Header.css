@@ -1,0 +1,70 @@
+header {
+  background: #0067a3;
+  color: #fff;
+  font-size: 28px;
+  font-family: "Roboto-Regular", serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+  position: relative;
+}
+.menu {
+  display: flex;
+}
+.title {
+  font-size: 28px;
+  font-family: "Roboto-Regular", serif;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.arrow {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  padding: 0;
+}
+.vector {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  padding: 0;
+}
+.button {
+  background-color: #0067a3;
+  border: none;
+  cursor: pointer;
+}
+.menu__list {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+  color: black;
+}
+.menu.active {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+.menu__item {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.dropdownmenu {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 7px;
+  margin-top: 50px;
+  padding: 5px;
+}

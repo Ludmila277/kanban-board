@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-import Main from "./components/main/Main";
-
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import Main from "./components/main/Main";
+
 function App() {
   const initialState = JSON.parse(window.localStorage.getItem("tasks")) || [];
   const [tasks, setTasks] = useState(initialState);
@@ -15,7 +15,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="container">
+      <div className="wrapper">
         <Header />
         <Main tasks={tasks} setTasks={setTasks} />
         <Footer count={count} count1={count1} />
