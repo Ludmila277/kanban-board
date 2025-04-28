@@ -26,6 +26,14 @@
   font-family: "Roboto-Regular", serif;
 }
 
+.task-select {
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .task:hover {
   text-decoration: underline;
 }

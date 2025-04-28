@@ -1,57 +1,83 @@
-import { useState } from "react";
-import "./Forms.css";
+import { useState,useEffect } from "react";
 
-const FormAddNewTask = (props) => {
-  const { formSubmit, onInputActive } = props;
+const FormAddNewTask = ({
+  formSubmit,
+  selectedTask,
+  setSelectedTask,
+  allTasks,
+  removeTask,
+}) => {
   const [values, setValues] = useState({
-    title: "",
-    description: "",
+    title: selectedTask?.title || '',
+    description: selectedTask?.description || '',
   });
 
-  const handleChange = (e) => {
-    const fieldName = e.target.name;
-    setValues({ ...values, [fieldName]: e.target.value });
-    onInputActive(true);
-  };
+  useEffect(() => {
+    // Обновляем значения при изменении selectedTask
+    if (selectedTask) {
+      setValues({
+        title: selectedTask.title || '',
+        description: selectedTask.description || '',
+      });
+    }
+  }, [selectedTask]);
 
-  const handleBlur = () => {
-    onInputActive(false);
+  const handleChange = (e) => {
+    setValues((prevValues) => ({
+      ...prevValues,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (values.title) {
-      formSubmit(values.title, values.description);
+    const taskId = selectedTask?.id;
+    formSubmit(values.title, values.description);
+    setValues({ title: '', description: '' });
+    setSelectedTask(null);
+    if (taskId) {
+      removeTask(taskId);
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="form">
+      <select
+        value={selectedTask?.id || ''}
+        onChange={(e) => {
+          const selected = allTasks.find((task) => task.id === e.target.value);
+          setSelectedTask(selected);
+        }}
+      >
+        <option value="">Select existing task</option>
+        {allTasks?.map((task) => (
+          <option key={task.id} value={task.id}>
+            {task.title}
+          </option>
+        ))}
+      </select>
+
       <input
-        className="input"
-        id="taskTitle"
-        name="title"
         type="text"
+        name="title"
         placeholder="Enter task title"
-        onChange={handleChange}
         value={values.title}
-        onBlur={handleBlur}
+        onChange={handleChange}
+        required
       />
+
       <textarea
-        className="textarea"
-        id="taskDescription"
         name="description"
         placeholder="Enter task description"
         value={values.description}
         onChange={handleChange}
-        onBlur={handleBlur}
       />
-      <button className="submit" type="submit">
+
+      <button type="submit" className="submit">
         Submit
       </button>
     </form>
   );
 };
-
 
 export default FormAddNewTask;

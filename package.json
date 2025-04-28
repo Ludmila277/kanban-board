@@ -12,8 +12,10 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "localforage": "^1.10.0",
+    "nanoid": "^5.1.5",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
+    "react-dnd": "^16.0.1",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
     "uniqid": "^5.4.0",

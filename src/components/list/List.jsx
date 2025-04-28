@@ -1,57 +1,60 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import {LIST_COLORS } from "../../config";
 import FormAddNewTask from "../forms/FormAddNewTask";
+import { LIST_COLORS } from "../../config";
 import "./List.css";
-
-
 const List = (props) => {
-  const { type, title, tasks, addNewTask } = props;
+  const { type, title, tasks, addNewTask, allTasks, moveTask, removeTask } = props;
   const [isFormVisible, setFormVisible] = useState(false);
-  const [isInputActive, setInputActive] = useState(false);
-  const [isButtonHidden, setButtonHidden] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const handleAddNewClick = () => {
-    setButtonHidden(true);
     setFormVisible(true);
   };
 
-  const handleInputActive = (isActive) => {
-    setInputActive(isActive);
+  const formSubmit = (title, description) => {
+    addNewTask(title, description, type); // Передаем description
+    setFormVisible(false);
+    setSelectedTask(null);
   };
 
-  const formSubmit = (title, description) => {
-    addNewTask(title, description, type);
-    setFormVisible(false);
-    setButtonHidden(false);
+  const handleTaskSelect = (taskId) => {
+    const selected = allTasks.find((task) => task.id === taskId);
+    if (selected) {
+      moveTask(selected.id, selected.status, type);
+      removeTask(selected.id);
+      setSelectedTask(selected);
+    }
   };
 
   return (
     <div className="list">
       <h2 className="listTitle">{title}</h2>
-      {tasks.length ? (
-        tasks.map((task) => (
-          <Link to={`/tasks/${task.id}`} key={task.id} className="taskLink">
-            <div
-              className="task"
-              style={{ background: LIST_COLORS[task.status] }}
-            >
-              {task.title}
-            </div>
+      {tasks.map((task) => (
+        <div
+          key={task.id}
+          className="task"
+          style={{ background: LIST_COLORS[type] }}
+        >
+          <Link to={`/tasks/${task.id}`}>
+            <div className="task-title">{task.title}</div>
           </Link>
-        ))
-      ) : (
-        <p>No tasks added yet</p>
-      )}
-      {!isButtonHidden && !isInputActive && (
+        </div>
+      ))}
+      {!isFormVisible && (
         <button onClick={handleAddNewClick} className="addButton">
           + Add card
         </button>
       )}
+
       {isFormVisible && (
-        <FormAddNewTask 
+        <FormAddNewTask
           formSubmit={formSubmit}
-          onInputActive={handleInputActive}
+          selectedTask={selectedTask}
+          setSelectedTask={setSelectedTask}
+          allTasks={allTasks}
+          onTaskSelect={handleTaskSelect}
+          removeTask={removeTask}
         />
       )}
     </div>
