@@ -4,7 +4,8 @@ import FormAddNewTask from "../forms/FormAddNewTask";
 import { LIST_COLORS } from "../../config";
 import "./List.css";
 const List = (props) => {
-  const { type, title, tasks, addNewTask, allTasks, moveTask, removeTask } = props;
+  const { type, title, tasks, addNewTask, allTasks, moveTask, removeTask } =
+    props;
   const [isFormVisible, setFormVisible] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
 
@@ -13,7 +14,7 @@ const List = (props) => {
   };
 
   const formSubmit = (title, description) => {
-    addNewTask(title, description, type); // Передаем description
+    addNewTask(title, description, type);
     setFormVisible(false);
     setSelectedTask(null);
   };

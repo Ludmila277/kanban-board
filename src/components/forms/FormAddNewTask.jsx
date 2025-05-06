@@ -1,4 +1,5 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import "./Forms.css";
 
 const FormAddNewTask = ({
   formSubmit,
@@ -8,16 +9,15 @@ const FormAddNewTask = ({
   removeTask,
 }) => {
   const [values, setValues] = useState({
-    title: selectedTask?.title || '',
-    description: selectedTask?.description || '',
+    title: selectedTask?.title || "",
+    description: selectedTask?.description || "",
   });
 
   useEffect(() => {
-    // Обновляем значения при изменении selectedTask
     if (selectedTask) {
       setValues({
-        title: selectedTask.title || '',
-        description: selectedTask.description || '',
+        title: selectedTask.title || "",
+        description: selectedTask.description || "",
       });
     }
   }, [selectedTask]);
@@ -33,7 +33,7 @@ const FormAddNewTask = ({
     e.preventDefault();
     const taskId = selectedTask?.id;
     formSubmit(values.title, values.description);
-    setValues({ title: '', description: '' });
+    setValues({ title: "", description: "" });
     setSelectedTask(null);
     if (taskId) {
       removeTask(taskId);
@@ -43,7 +43,7 @@ const FormAddNewTask = ({
   return (
     <form onSubmit={handleSubmit} className="form">
       <select
-        value={selectedTask?.id || ''}
+        value={selectedTask?.id || ""}
         onChange={(e) => {
           const selected = allTasks.find((task) => task.id === e.target.value);
           setSelectedTask(selected);

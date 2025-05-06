@@ -3,3 +3,12 @@
   justify-content: space-around;
   align-items: flex-start;
 }
+
+@media (max-width: 768px) {
+  .board {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    align-items: center;
+  }
+}

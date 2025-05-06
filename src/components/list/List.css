@@ -6,75 +6,51 @@
   box-sizing: border-box;
   margin: 15px;
   min-height: 282px;
-  box-shadow: 2px 2px 8px rgb(0 0 0 / 20%);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
   overflow-x: hidden;
   max-height: calc(100vh - 250px);
-  
 }
+
 .listTitle {
   margin-top: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
 }
 
 .task {
-  background: #fff;
-  color: #000000;
   margin: 7px 0;
   padding: 8px;
   border-radius: 8px;
+}
+
+.task > a {
   text-decoration: none;
+  color: #000;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
   font-size: 18px;
-  font-family: "Roboto-Regular", serif;
-}
-
-.task-select {
-  margin-bottom: 10px;
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.task:hover {
-  text-decoration: underline;
-}
-
-.taskLink {
-  text-decoration: none;
 }
 
 .addButton {
   background: none;
   border: none;
   appearance: none;
-  font-size: 15px;
+  font-size: 18px;
   color: #737373;
   margin-top: 15px;
   cursor: pointer;
-  font-size: 18px;
-  font-family: "Roboto-Regular", serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .addButton:hover {
   color: #000;
 }
-.select {
-  font-size: 18px;
-  font-family: "Roboto-Regular", serif;
-  margin: 5px 0;
-  padding: 5px;
-  border-radius: 8px;
-  border-color: #dedede;
-  width: 100%;
-}
-.option {
-  margin: 8px 0;
-  padding: 8px;
-  border-radius: 8px;
-  border-color: #dedede;
-}
-.option:hover,
-.option:focus {
-  background-color: #dedede;
-  font-family: "Roboto-Regular", serif;
-  font-style: italic;
+
+@media (max-width: 768px) {
+  .list {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+  }
 }

@@ -1,8 +1,8 @@
+import { useState } from "react";
 import Logo from "../../img/user-avatar.svg";
 import Arrow from "../../img/arrow.svg";
 import Vector from "../../img/Vector.svg";
 import "./Header.css";
-import { useState } from "react";
 import Dropdownmenu from "../dropdownmenu/dropdownmenu";
 
 function Header() {

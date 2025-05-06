@@ -1,4 +1,5 @@
 .wrapper {
+  height: 100%;
   background: #fff;
   border-radius: 8px;
   padding: 20px;
@@ -13,7 +14,7 @@
 .title {
   margin: 0;
   font-size: 24px;
-  font-family: "Roboto-Regular", serif;
+  font-family: "Roboto", sans-serif; 
 }
 
 .homeLink {
@@ -31,13 +32,41 @@
 .textarea {
   background: #fff;
   border-radius: 8px;
-  border: #fff;
+  border: 1px solid #ccc; 
   resize: both;
   display: block;
   font-size: 18px;
-  font-family: "Roboto-Regular", serif;
+  font-family: "Roboto", sans-serif;
   height: 50px;
   width: 100%;
   overflow: auto;
   min-height: 50px;
+}
+
+.description-container{
+  cursor: pointer;
+}
+
+.editable-description {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.button{
+  display: flex;
+  flex-direction: row;
+ 
+}
+
+.buttons {
+  margin-left: 5px;
+  padding: 8px 16px; 
+  margin-top: 10px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  cursor: pointer;
 }

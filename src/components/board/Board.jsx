@@ -1,16 +1,34 @@
+import { useState, useMemo } from "react";
 import { nanoid } from "nanoid";
 import { LIST_TYPES, LIST_COPY } from "../../config";
 import List from "../list/List";
-import "./Board.css";
-import { useState, useMemo } from "react";
 import FormAddNewTask from "../forms/FormAddNewTask";
+import "./Board.css";
+
 const Board = ({ tasks, setTasks }) => {
   const [isFormVisible, setFormVisible] = useState(false);
   const [activeListType, setActiveListType] = useState(LIST_TYPES.BACKLOG);
 
+  const updateTask = async (params) => {
+    const { category, taskId, updates } = params;
+
+    setTasks((prevTasks) => {
+      const updatedTasks = {
+        ...prevTasks,
+        [category]: prevTasks[category].map((task) => {
+          if (task.id === taskId) {
+            return { ...task, ...updates };
+          }
+          return task;
+        }),
+      };
+      return updatedTasks;
+    });
+  };
+
   const addNewTask = (title, description, status) => {
     const newTask = {
-      id: nanoid(), // используем nanoid
+      id: nanoid(),
       title: title,
       description: description,
       created: new Date().toISOString(),
@@ -22,26 +40,18 @@ const Board = ({ tasks, setTasks }) => {
       [status]: [...(prevTasks[status] || []), newTask],
     }));
   };
-
   const moveTask = (taskId, fromStatus, toStatus) => {
     setTasks((prevTasks) => {
-      // Копируем предыдущие задачи, чтобы избежать мутации
-      const newTasks = { ...prevTasks };
-      const currentTasks = [...(newTasks[fromStatus] || [])]; // Копируем массив задач из колонки fromStatus
-      const taskIndex = currentTasks.findIndex((task) => task.id === taskId);
-      const task = currentTasks[taskIndex];
-
+      const task = prevTasks[fromStatus].find((task) => task.id === taskId);
       if (task) {
-        // Удаляем задачу из текущей колонки
-        currentTasks.splice(taskIndex, 1);
-        newTasks[fromStatus] = currentTasks;
-
-        // Добавляем задачу в новую колонку с сохранением всех данных
-        newTasks[toStatus] = [...(newTasks[toStatus] || []), { ...task, status: toStatus }];
-
-        return newTasks;
+        prevTasks[fromStatus] = prevTasks[fromStatus].filter(
+          (task) => task.id !== taskId
+        );
+        prevTasks[toStatus] = [
+          ...(prevTasks[toStatus] || []),
+          { ...task, status: toStatus },
+        ];
       }
-
       return prevTasks;
     });
   };
@@ -49,13 +59,12 @@ const Board = ({ tasks, setTasks }) => {
   const removeTask = (taskId) => {
     setTasks((prevTasks) => {
       return Object.entries(prevTasks).reduce((acc, [status, tasks]) => {
-        if (Array.isArray(tasks)) {
-          acc[status] = tasks.filter((task) => task.id !== taskId);
-        }
+        acc[status] = tasks.filter((task) => task.id !== taskId);
         return acc;
       }, {});
     });
   };
+
   const handleAddNewClick = (type) => {
     setActiveListType(type);
     setFormVisible(true);
@@ -80,11 +89,13 @@ const Board = ({ tasks, setTasks }) => {
             type={type}
             title={LIST_COPY[type]}
             tasks={columnTasks}
+            setTasks={setTasks}
             addNewTask={addNewTask}
             onAddClick={() => handleAddNewClick(type)}
             allTasks={allTasks}
             moveTask={moveTask}
             removeTask={removeTask}
+            updateTask={updateTask}
           />
         );
       })}
@@ -92,11 +103,11 @@ const Board = ({ tasks, setTasks }) => {
         <FormAddNewTask
           formSubmit={handleFormSubmit}
           initialStatus={activeListType}
-          removeTask={removeTask} // передаем функцию удаления
+          removeTask={removeTask}
         />
       )}
     </div>
   );
 };
 
-export default Board
+export default Board;

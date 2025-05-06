@@ -13,10 +13,32 @@ const App = () => {
   };
 
   const [tasks, setTasks] = useState(initialState);
+  const [isSaving, setIsSaving] = useState(false); 
 
+
+  const updateTask = (listType, taskId, updates) => {
+    setTasks((prevTasks) => {
+      const updatedTasks = {
+        ...prevTasks,
+        [listType]: prevTasks[listType].map(task => 
+          task.id === taskId ? { ...task, ...updates } : task
+        )
+      };
+      return updatedTasks;
+    });
+  };
+
+ 
   useEffect(() => {
-    const saveTasks = () => {
-      window.localStorage.setItem("tasks", JSON.stringify(tasks));
+    const saveTasks = async () => {
+      try {
+        setIsSaving(true);
+        await window.localStorage.setItem("tasks", JSON.stringify(tasks));
+        setIsSaving(false);
+      } catch (error) {
+        console.error('Ошибка сохранения:', error);
+        setIsSaving(false);
+      }
     };
     saveTasks();
   }, [tasks]);
@@ -37,7 +59,12 @@ const App = () => {
     <BrowserRouter>
       <div className="wrapper">
         <Header />
-        <Main tasks={tasks} setTasks={setTasks} />
+        <Main 
+          tasks={tasks} 
+          setTasks={setTasks} 
+          updateTask={updateTask} 
+          isSaving={isSaving}
+        />
         <Footer 
           activeCount={countActiveTasks()}
           doneCount={countDoneTasks()}

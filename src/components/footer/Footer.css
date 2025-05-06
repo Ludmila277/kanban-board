@@ -2,20 +2,23 @@
   min-height: 50px;
   background: #0067a3;
   font-size: 18px;
-  font-family: "Roboto-Regular", serif;
+  font-family: "Roboto", sans-serif; 
+  font-weight: 400;
   color: #fff;
   display: flex;
-  padding: 0 20px;
+  padding: 0 37px;
   align-items: center;
+  justify-content: space-between; 
 }
 
 .counts {
   display: flex;
+  gap: 30px; 
 }
 
 .count {
   position: relative;
-  margin-right: 30px;
+
 }
 
 .count + .count::before {
@@ -31,4 +34,20 @@
 
 .copy {
   margin-left: auto;
+}
+
+@media (max-width: 480px) {
+  .footer {
+    flex-direction: column; 
+    padding: 15px;
+  }
+  
+  .counts {
+    flex-direction: column; 
+    gap: 10px; 
+  }
+  
+  .count + .count::before {
+    display: none; 
+  }
 }
