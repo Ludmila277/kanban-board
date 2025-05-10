@@ -5,22 +5,54 @@
   margin-top: 15px;
 }
 
-.textarea {
-  min-height: 100px;
-  resize: both;
-  font-family: "Roboto", sans-serif;
-  overflow: auto;
+.form-field {
+  margin-bottom: 15px;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.error {
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 
 .input,
-.textarea {
+.select-task {
   display: block;
-  padding: 8px;
+  padding: 5px;
   border: 1px solid #465671;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 400;
-  margin-bottom: 7px;
+  width: 100%;
+}
+
+.select-task {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: white;
+  padding: 8px 30px 8px 10px;
+  cursor: pointer;
+  background-image: url("../../img/Vector 1.svg");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  width: 100%; /* добавим ширину для выравнивания */
+}
+
+.select-task::-ms-expand {
+  display: none;
+}
+
+.select-task option {
+  padding: 8px;
 }
 
 .button-container {
@@ -28,23 +60,6 @@
   justify-content: flex-end;
   gap: 10px;
   margin-top: 10px;
-}
-
-.use-existing {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.task-select {
-  margin-bottom: 10px;
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
 }
 
 .submit {
@@ -55,9 +70,16 @@
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  align-self: flex-end;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
 }
 
 .submit:hover {
   background: #5d7194;
+}
+
+.input::placeholder {
+  color: #999;
+  opacity: 1;
 }

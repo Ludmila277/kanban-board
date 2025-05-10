@@ -4,65 +4,73 @@ import { LIST_TYPES, LIST_COPY } from "../../config";
 import List from "../list/List";
 import FormAddNewTask from "../forms/FormAddNewTask";
 import "./Board.css";
-
 const Board = ({ tasks, setTasks }) => {
   const [isFormVisible, setFormVisible] = useState(false);
   const [activeListType, setActiveListType] = useState(LIST_TYPES.BACKLOG);
 
   const updateTask = async (params) => {
-    const { category, taskId, updates } = params;
-
-    setTasks((prevTasks) => {
-      const updatedTasks = {
-        ...prevTasks,
-        [category]: prevTasks[category].map((task) => {
-          if (task.id === taskId) {
-            return { ...task, ...updates };
-          }
-          return task;
-        }),
-      };
-      return updatedTasks;
-    });
+    try {
+      const { category, taskId, updates } = params;
+      setTasks((prevTasks) => {
+        const updatedTasks = {
+          ...prevTasks,
+          [category]: prevTasks[category]?.map((task) => {
+            if (task.id === taskId) {
+              return { ...task, ...updates };
+            }
+            return task;
+          }),
+        };
+        return updatedTasks;
+      });
+    } catch (error) {
+      console.error('Ошибка обновления задачи:', error);
+    }
   };
 
   const addNewTask = (title, description, status) => {
     const newTask = {
       id: nanoid(),
-      title: title,
-      description: description,
+      title,
+      description,
       created: new Date().toISOString(),
-      status: status,
+      status,
     };
-
     setTasks((prevTasks) => ({
       ...prevTasks,
       [status]: [...(prevTasks[status] || []), newTask],
     }));
   };
+
   const moveTask = (taskId, fromStatus, toStatus) => {
     setTasks((prevTasks) => {
-      const task = prevTasks[fromStatus].find((task) => task.id === taskId);
+      const task = prevTasks[fromStatus]?.find((task) => task.id === taskId);
       if (task) {
-        prevTasks[fromStatus] = prevTasks[fromStatus].filter(
+        const updatedTasks = { ...prevTasks };
+        
+        updatedTasks[fromStatus] = updatedTasks[fromStatus]?.filter(
           (task) => task.id !== taskId
         );
-        prevTasks[toStatus] = [
-          ...(prevTasks[toStatus] || []),
+        
+        updatedTasks[toStatus] = [
+          ...(updatedTasks[toStatus] || []),
           { ...task, status: toStatus },
         ];
+        
+        return updatedTasks;
       }
       return prevTasks;
     });
   };
 
   const removeTask = (taskId) => {
-    setTasks((prevTasks) => {
-      return Object.entries(prevTasks).reduce((acc, [status, tasks]) => {
-        acc[status] = tasks.filter((task) => task.id !== taskId);
-        return acc;
-      }, {});
-    });
+    setTasks((prevTasks) => 
+      Object.fromEntries(
+        Object.entries(prevTasks).map(([status, tasks]) => 
+          [status, tasks.filter((task) => task.id !== taskId)]
+        )
+      )
+    );
   };
 
   const handleAddNewClick = (type) => {
@@ -104,6 +112,8 @@ const Board = ({ tasks, setTasks }) => {
           formSubmit={handleFormSubmit}
           initialStatus={activeListType}
           removeTask={removeTask}
+          allTasks={allTasks}
+          type={activeListType}
         />
       )}
     </div>

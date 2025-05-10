@@ -41,10 +41,12 @@
   width: 100%;
   overflow: auto;
   min-height: 50px;
+  
 }
 
 .description-container{
   cursor: pointer;
+  
 }
 
 .editable-description {

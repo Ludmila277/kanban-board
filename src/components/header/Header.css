@@ -7,13 +7,13 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 36px;
+  padding: 5px 46px;
   position: relative;
  }
  
  .menu {
   display: flex;
-  gap: 10px; 
+
  }
  
  .title {
@@ -29,12 +29,12 @@ header {
   border-radius: 50%;
  }
  
- .arrow,
+.arrow,
 .vector {
  width: 14px;
  height: 14px;
  margin: 0;
- padding: 0;
+
  position: absolute;
  top: 35%;
 }
@@ -43,7 +43,7 @@ header {
   background-color: #0067a3;
   border: none;
   cursor: pointer;
-  padding: 5px; 
+  padding-right: 10px;
  }
  
  .menu__list {

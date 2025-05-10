@@ -1,12 +1,11 @@
 .list {
-  width: 350px;
+  width: 282px;
   background: #ebecf0;
   padding: 20px;
   border-radius: 8px;
   box-sizing: border-box;
   margin: 15px;
-  min-height: 282px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  min-height: 197px;
   overflow-x: hidden;
   max-height: calc(100vh - 250px);
 }
