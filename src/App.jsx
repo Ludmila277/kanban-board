@@ -4,6 +4,7 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Main from "./components/main/Main";
 import { LIST_TYPES } from "./config";
+import  "./App.css"
 
 const App = () => {
   const initialState = JSON.parse(window.localStorage.getItem("tasks")) || {

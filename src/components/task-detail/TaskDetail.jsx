@@ -3,104 +3,101 @@ import { useState, useEffect } from "react";
 import "./TaskDetail.css";
 
 const TaskDetail = (props) => {
- const { taskId } = useParams();
- const { tasks, updateTask } = props;
- const [task, setTask] = useState(null);
- const[ isEditing, setIsEditing] = useState(false);
- const [newDescription, setNewDescription] = useState("");
+  const { taskId } = useParams();
+  const { tasks, updateTask } = props;
+  const [task, setTask] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [newDescription, setNewDescription] = useState("");
 
- const findTask = (tasks, taskId) => {
- try {
- if (!tasks) return null;
- 
- for (const category in tasks) {
- const found = tasks[category].find((task) => task.id === taskId);
- if (found) return { ...found, category };
- }
- return null;
- } catch (error) {
- console.error('Ошибка при поиске задачи:', error);
- return null;
- }
- };
+  const findTask = (tasks, taskId) => {
+    try {
+      if (!tasks) return null;
 
- useEffect(() => {
- const foundTask = findTask(tasks, taskId);
- if (foundTask) {
- setTask(foundTask);
- setNewDescription(foundTask.description || "");
- }
- }, [tasks, taskId]);
+      for (const category in tasks) {
+        const found = tasks[category].find((task) => task.id === taskId);
+        if (found) return { ...found, category };
+      }
+      return null;
+    } catch (error) {
+      console.error("Ошибка при поиске задачи:", error);
+      return null;
+    }
+  };
 
- const toggleEditMode = () => {
- setIsEditing(!isEditing);
- };
+  useEffect(() => {
+    const foundTask = findTask(tasks, taskId);
+    if (foundTask) {
+      setTask(foundTask);
+      setNewDescription(foundTask.description || "");
+    }
+  }, [tasks, taskId]);
 
- const saveChanges = async () => {
- try {
- if (!task || newDescription === task.description) {
- setIsEditing(false);
- return;
- }
- 
- await updateTask(task.category, taskId, {
- description: newDescription,
- });
- 
- setTask({ ...task, description: newDescription });
- setIsEditing(false);
- } catch (error) {
- console.error('Ошибка при сохранении:', error);
- setNewDescription(task?.description || "");
- }
- };
+  const toggleEditMode = () => {
+    setIsEditing(!isEditing);
+  };
 
- if (!task) return <div>Задача не найдена</div>;
+  const saveChanges = async () => {
+    try {
+      if (!task || newDescription === task.description) {
+        setIsEditing(false);
+        return;
+      }
 
- return (
- <div className="wrapper">
- <Link to="/" className="homeLink">
- ×
- </Link>
+      await updateTask(task.category, taskId, {
+        description: newDescription,
+      });
 
- <div className="task-details">
- <div className="header">
- <h2 className="title">{task.title}</h2>
- </div>
+      setTask({ ...task, description: newDescription });
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Ошибка при сохранении:", error);
+      setNewDescription(task?.description || "");
+    }
+  };
 
- <div className="description-container">
- {isEditing ? (
- <div>
- <textarea
- className="editable-description"
- value={newDescription}
- onChange={(e) => setNewDescription(e.target.value)}
- />
- <button className="buttons" onClick={saveChanges}>
- Сохранить
- </button>
- <button
- className="buttons"
- onClick={() => {
- setIsEditing(false);
- setNewDescription(task.description);
- }}
- >
- Отмена
- </button>
- </div>
- ) : (
- <div
- className="description"
- onClick={toggleEditMode}
- >
- {task.description || "This task has no description"}
- </div>
- )}
- </div>
- </div>
- </div>
- );
+  if (!task) return <div>Задача не найдена</div>;
+
+  return (
+    <div className="wrapper">
+      <Link to="/" className="homeLink">
+        ×
+      </Link>
+
+      <div className="task-details">
+        <div className="header">
+          <h2 className="title">{task.title}</h2>
+        </div>
+
+        <div className="description-container">
+          {isEditing ? (
+            <div>
+              <textarea
+                className="editable-description"
+                value={newDescription}
+                onChange={(e) => setNewDescription(e.target.value)}
+              />
+              <button className="buttons" onClick={saveChanges}>
+                Сохранить
+              </button>
+              <button
+                className="buttons"
+                onClick={() => {
+                  setIsEditing(false);
+                  setNewDescription(task.description);
+                }}
+              >
+                Отмена
+              </button>
+            </div>
+          ) : (
+            <div className="description" onClick={toggleEditMode}>
+              {task.description || "This task has no description"}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default TaskDetail;

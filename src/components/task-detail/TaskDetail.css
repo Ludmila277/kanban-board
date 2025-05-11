@@ -1,8 +1,10 @@
 .wrapper {
-  height: 100%;
+  min-height: 453px;
   background: #fff;
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 20px;
+  max-width: 100%;
+  overflow: auto;
 }
 
 .header {
@@ -14,7 +16,7 @@
 .title {
   margin: 0;
   font-size: 24px;
-  font-family: "Roboto", sans-serif; 
+  font-family: "Roboto", sans-serif;
 }
 
 .homeLink {
@@ -32,21 +34,16 @@
 .textarea {
   background: #fff;
   border-radius: 8px;
-  border: 1px solid #ccc; 
+  border: 1px solid #ccc;
   resize: both;
   display: block;
   font-size: 18px;
   font-family: "Roboto", sans-serif;
-  height: 50px;
-  width: 100%;
   overflow: auto;
-  min-height: 50px;
-  
 }
 
-.description-container{
+.description-container {
   cursor: pointer;
-  
 }
 
 .editable-description {
@@ -57,18 +54,48 @@
   cursor: pointer;
 }
 
-
-.button{
+.button {
   display: flex;
   flex-direction: row;
- 
 }
 
 .buttons {
   margin-left: 5px;
-  padding: 8px 16px; 
+  padding: 8px 16px;
   margin-top: 10px;
   border: 1px solid #000;
   border-radius: 4px;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 15px;
+    resize: both;
+    min-width: 320px;
+    max-height: 100vh;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .buttons {
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .buttons {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
 }
