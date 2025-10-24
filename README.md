@@ -1,8 +1,30 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Описание проекта.Kanban Board — это веб-приложение для управления задачами по методологии Kanban. Приложение позволяет пользователям создавать, редактировать и отслеживать задачи в различных статусах: “Нужно сделать”, “В процессе” и “Завершено”.
+Основные функции:
+1.Управление задачами:
+Создание новых задач;
+Перемещение задач между колонками;
+Редактирование существующих задач;
+Удаление задач;
+2.Организация рабочего процесса:
+Разделение задач по статусам;
+Визуальное отслеживание прогресса;
+Возможность добавления заметок к задачам;
+Технологии и стек разработки
+React.js — для создания интерактивного интерфейса
+JavaScript — для логики приложения
+Vite — для быстрой сборки проекта
+HTML/CSS — для структуры и стилизации
+Инструкция по запуску
+Клонирование репозитория:
+bash
+git clone <ссылка-на-репозиторий>
+Установка зависимостей:
+bash
+npm install
+# или
+yarn install
+Запуск приложения:
+bash
+npm run dev
+# или
+yarn dev
